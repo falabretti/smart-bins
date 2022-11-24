@@ -10,7 +10,7 @@ def write_record(location, sensor_id, volume):
         'volume': volume
     })
 
-    print(response.status_code, response.json())
+    print(response.status_code)
 
 
 def read_records():
