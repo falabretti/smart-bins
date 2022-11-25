@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  influxdb:
+    image: influxdb:2.5.1
+    container_name: influxdb
+    ports:
+      - 8086:8086
+    networks:
+      - smartbins-network
+  
+  server:
+    build: .
+    container_name: server
+    env_file: .env
+    ports:
+     - 5000:5000
+    networks:
+      - smartbins-network
+
+networks:
+  smartbins-network:
+    driver: bridge

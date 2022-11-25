@@ -19,4 +19,4 @@ def retrieve_records():
     return jsonify(client.query_records(last_only=last_only))
 
 
-app.run(debug=True)
+app.run(host="0.0.0.0", debug=True)
