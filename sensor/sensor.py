@@ -1,25 +1,37 @@
+import argparse
+import random
 import requests
+import time
 
-server_url = 'http://localhost:5000'
 
-
-def write_record(location, sensor_id, volume):
-    response = requests.post(server_url + '/record', json={
+def write_record(server_url, location, sensor_id, volume):
+    record = {
         'location': location,
         'sensor_id': sensor_id,
         'volume': volume
-    })
+    }
 
-    print(response.status_code)
-
-
-def read_records():
-    response = requests.get(server_url + '/record')
-    print(response.json())
+    print(f'Sending record: {record}')
+    requests.post(server_url + '/record', json=record)
 
 
-write_record('City', '50', 0.3)
-write_record('City', '56', 0.7)
-write_record('City', '14', 0.1)
-write_record('City', '76', 0.3)
-read_records()
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--id', dest='sensor_id', type=str, required=True)
+    parser.add_argument('--location', dest='location', type=str, required=True)
+    parser.add_argument('--server', dest='server_url', type=str, required=True)
+    return parser.parse_args()
+
+
+def simulate_sensor(args):
+    while True:
+        volume = random.random()
+        write_record(args.server_url, args.location, args.sensor_id, volume)
+
+        sleep_time = 30 + random.randint(0, 5)
+        print(f'Sleeping for {sleep_time}s')
+        time.sleep(sleep_time)
+
+
+args = parse_args()
+simulate_sensor(args)
