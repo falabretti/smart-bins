@@ -21,15 +21,17 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <Header />
-      <Box sx={{ padding: 4 }}>
-        <Grid container spacing={2}>
-          {records.map((record, key) => (
-            <Grid item xs={12} md={4} key={key}>
-              <SensorCard record={record} />
-            </Grid>
-          ))}
-        </Grid>
+      <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+        <Header />
+        <Box sx={{ padding: 4, backgroundColor: "#F0F2F5", flexGrow: 1 }}>
+          <Grid container spacing={2}>
+            {records.map((record, key) => (
+              <Grid item xs={12} md={4} lg={3} key={key}>
+                <SensorCard record={record} />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       </Box>
     </>
   );
