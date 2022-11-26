@@ -1,11 +1,16 @@
 import React from 'react';
-import { Card, CardContent, Typography, CardActions, Button, Box, Grid, useTheme } from "@mui/material";
+import { Card, Typography, Box, Grid, useTheme } from "@mui/material";
 import SensorsIcon from '@mui/icons-material/Sensors';
+import { SensorRecord } from "../services/client";
 
+type SensorCardProps = {
+  record: SensorRecord
+}
 
-function SensorCard() {
+function SensorCard(props: SensorCardProps) {
 
   const theme = useTheme();
+  const { sensor_id, location, volume } = props.record;
 
 
   return (
@@ -29,10 +34,10 @@ function SensorCard() {
           <Grid item xs={8}>
             <Box sx={{ marginLeft: 2, textAlign: "right" }}>
               <Typography variant="subtitle1">
-                Sensor ID, Location
+                Sensor {sensor_id}, {location}
               </Typography>
               <Typography variant="h5" fontWeight={700}>
-                70%
+                {Math.trunc(volume * 100)}%
               </Typography>
             </Box>
           </Grid>

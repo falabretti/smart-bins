@@ -1,27 +1,34 @@
 import { Box, CssBaseline, Grid, Typography } from "@mui/material";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from "./Header";
 import SensorCard from "./SensorCard";
+import { getLatestRecords, SensorRecord } from "../services/client";
 
 function App() {
+
+  const [records, setRecords] = useState<SensorRecord[]>([]);
+
+  function loadRecords() {
+    getLatestRecords()
+      .then(res => setRecords(res.data))
+      .catch(error => console.log(error));
+  }
+
+  useEffect(() => {
+    loadRecords();
+  }, []);
+
   return (
     <>
       <CssBaseline />
       <Header />
       <Box sx={{ padding: 4 }}>
         <Grid container spacing={2}>
-          <Grid item sm={12} md={4}>
-            <SensorCard />
-          </Grid>
-          <Grid item sm={12} md={4}>
-            <SensorCard />
-          </Grid>
-          <Grid item sm={12} md={4}>
-            <SensorCard />
-          </Grid>
-          <Grid item sm={12} md={4}>
-            <SensorCard />
-          </Grid>
+          {records.map((record, key) => (
+            <Grid item xs={12} md={4} key={key}>
+              <SensorCard record={record} />
+            </Grid>
+          ))}
         </Grid>
       </Box>
     </>
