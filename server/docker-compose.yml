@@ -7,7 +7,7 @@ services:
     ports:
       - 8086:8086
     networks:
-      - smartbins-network
+      - net
   
   server:
     build: .
@@ -16,8 +16,8 @@ services:
     ports:
      - 5000:5000
     networks:
-      - smartbins-network
+      - net
 
 networks:
-  smartbins-network:
+  net:
     driver: bridge
