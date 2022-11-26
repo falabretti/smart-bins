@@ -61,7 +61,8 @@ def build_results(result):
             results.append({
                 'location': record.values.get(LOCATION_TAG),
                 'sensor_id': record.values.get(SENSOR_ID_TAG),
-                record.get_field(): record.get_value()
+                record.get_field(): record.get_value(),
+                'timestamp': record.get_time()
             })
 
     return results
