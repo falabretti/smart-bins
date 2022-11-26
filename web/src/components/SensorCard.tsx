@@ -12,6 +12,16 @@ function SensorCard(props: SensorCardProps) {
   const theme = useTheme();
   const { sensor_id, location, volume } = props.record;
 
+  var alertColorStart = theme.palette.success.light;
+  var alertColorEnd = theme.palette.success.main;
+
+  if (volume >= 0.7) {
+    alertColorStart = theme.palette.error.light;
+    alertColorEnd = theme.palette.error.main; 
+  } else if (volume >= 0.5) {
+    alertColorStart = theme.palette.warning.light;
+    alertColorEnd = theme.palette.warning.main;
+  }
 
   return (
     <Card>
@@ -24,8 +34,7 @@ function SensorCard(props: SensorCardProps) {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              backgroundColor: theme.palette.primary.light,
-              background: `linear-gradient(228deg, ${theme.palette.primary.light}, ${theme.palette.primary.main})`,
+              background: `linear-gradient(228deg, ${alertColorStart}, ${alertColorEnd})`,
               borderRadius: '0.3rem'
             }}>
               <SensorsIcon sx={{ color: "white", fontSize: '2.5rem' }} />
