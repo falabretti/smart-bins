@@ -1,9 +1,11 @@
 import client
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 LAST_PARAM = 'last'
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/record', methods=['POST'])
