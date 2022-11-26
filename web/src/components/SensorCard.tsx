@@ -4,12 +4,14 @@ import SensorsIcon from '@mui/icons-material/Sensors';
 import { SensorRecord } from "../services/client";
 
 type SensorCardProps = {
-  record: SensorRecord
+  record: SensorRecord,
+  onClick?: (sensorId: string) => void
 }
 
 function SensorCard(props: SensorCardProps) {
 
   const theme = useTheme();
+  const { onClick } = props;
   const { sensor_id, location, volume } = props.record;
 
   var alertColorStart = theme.palette.success.light;
@@ -17,14 +19,14 @@ function SensorCard(props: SensorCardProps) {
 
   if (volume >= 0.7) {
     alertColorStart = theme.palette.error.light;
-    alertColorEnd = theme.palette.error.main; 
+    alertColorEnd = theme.palette.error.main;
   } else if (volume >= 0.5) {
     alertColorStart = theme.palette.warning.light;
     alertColorEnd = theme.palette.warning.main;
   }
 
   return (
-    <Card>
+    <Card sx={onClick && { cursor: "pointer" }} onClick={onClick && (() => onClick(sensor_id))}>
       <Box sx={{ padding: 2, borderRadius: '0.75rem' }}>
         <Grid container>
           <Grid item xs={4}>

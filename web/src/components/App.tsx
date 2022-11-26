@@ -1,39 +1,22 @@
-import { Box, CssBaseline, Grid, Typography } from "@mui/material";
-import React, { useEffect, useState } from 'react';
-import Header from "./Header";
-import SensorCard from "./SensorCard";
-import { getLatestRecords, SensorRecord } from "../services/client";
+import { Box, CssBaseline } from "@mui/material";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "../pages/Home";
+import SensorDetails from "../pages/SensorDetails";
+import Page from "./Page";
 
 function App() {
 
-  const [records, setRecords] = useState<SensorRecord[]>([]);
-
-  function loadRecords() {
-    getLatestRecords()
-      .then(res => setRecords(res.data))
-      .catch(error => console.log(error));
-  }
-
-  useEffect(() => {
-    loadRecords();
-  }, []);
-
   return (
-    <>
+    <Router>
       <CssBaseline />
-      <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-        <Header />
-        <Box sx={{ padding: 4, backgroundColor: "#F0F2F5", flexGrow: 1 }}>
-          <Grid container spacing={2}>
-            {records.map((record, key) => (
-              <Grid item xs={12} md={4} lg={3} key={key}>
-                <SensorCard record={record} />
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-      </Box>
-    </>
+      <Page>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sensor" element={<SensorDetails />} />
+        </Routes>
+      </Page>
+    </Router>
   );
 }
 
