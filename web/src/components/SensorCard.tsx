@@ -12,15 +12,15 @@ function SensorCard(props: SensorCardProps) {
 
   const theme = useTheme();
   const { onClick } = props;
-  const { sensor_id, location, volume } = props.record;
+  const { sensor_id, location, capacity } = props.record;
 
   var alertColorStart = theme.palette.success.light;
   var alertColorEnd = theme.palette.success.main;
 
-  if (volume >= 0.7) {
+  if (capacity >= 0.7) {
     alertColorStart = theme.palette.error.light;
     alertColorEnd = theme.palette.error.main;
-  } else if (volume >= 0.5) {
+  } else if (capacity >= 0.5) {
     alertColorStart = theme.palette.warning.light;
     alertColorEnd = theme.palette.warning.main;
   }
@@ -48,7 +48,7 @@ function SensorCard(props: SensorCardProps) {
                 Sensor {sensor_id}, {location}
               </Typography>
               <Typography variant="h5" fontWeight={700}>
-                {Math.trunc(volume * 100)}%
+                {Math.trunc(capacity * 100)}%
               </Typography>
             </Box>
           </Grid>

@@ -5,7 +5,7 @@ export const SERVER_URL = "http://localhost:5000"
 export type SensorRecord = {
     sensor_id: string,
     location: string,
-    volume: number,
+    capacity: number,
     timestamp: string
 }
 

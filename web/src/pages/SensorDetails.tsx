@@ -45,7 +45,7 @@ function SensorDetails(props: any) {
               <TableCell sx={{ fontWeight: 600 }}>Sensor Id</TableCell>
               <TableCell sx={{ fontWeight: 600 }} align="center">Location</TableCell>
               <TableCell sx={{ fontWeight: 600 }} align="center">Timestamp</TableCell>
-              <TableCell sx={{ fontWeight: 600 }} align="center">Volume</TableCell>
+              <TableCell sx={{ fontWeight: 600 }} align="center">Capacity</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -54,7 +54,7 @@ function SensorDetails(props: any) {
                 <TableCell>{record.sensor_id}</TableCell>
                 <TableCell align="center">{record.location}</TableCell>
                 <TableCell align="center">{new Date(record.timestamp).toLocaleString()}</TableCell>
-                <TableCell align="center">{Math.trunc(record.volume * 100)}%</TableCell>
+                <TableCell align="center">{Math.trunc(record.capacity * 100)}%</TableCell>
               </TableRow>
             ))}
           </TableBody>

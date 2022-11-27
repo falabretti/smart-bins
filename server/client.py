@@ -5,7 +5,7 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 MEASUREMENT = "bin_sensor"
 LOCATION_TAG = "location"
 SENSOR_ID_TAG = "sensor_id"
-FIELD = "volume"
+FIELD = "capacity"
 
 client = influxdb_client.InfluxDBClient(
     url=environment.URL,

@@ -4,11 +4,11 @@ import requests
 import time
 
 
-def write_record(server_url, location, sensor_id, volume):
+def write_record(server_url, location, sensor_id, capacity):
     record = {
         'location': location,
         'sensor_id': sensor_id,
-        'volume': volume
+        'capacity': capacity
     }
 
     print(f'Sending record: {record}')
@@ -28,8 +28,8 @@ def parse_args():
 
 def simulate_sensor(args):
     while True:
-        volume = random.random()
-        write_record(args.server_url, args.location, args.sensor_id, volume)
+        capacity = random.random()
+        write_record(args.server_url, args.location, args.sensor_id, capacity)
 
         sleep_time = 30 + random.randint(0, 5)
         print(f'Sleeping for {sleep_time}s')
