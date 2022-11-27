@@ -12,7 +12,10 @@ def write_record(server_url, location, sensor_id, volume):
     }
 
     print(f'Sending record: {record}')
-    requests.post(server_url + '/record', json=record)
+    try:
+        requests.post(server_url + '/record', json=record)
+    except Exception as e:
+        print('An error occurred when sending record to server:', e)
 
 
 def parse_args():
