@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from "axios"
 
-const HOST = 'http://localhost:5000'
+export const SERVER_URL = "http://localhost:5000"
 
 export type SensorRecord = {
     sensor_id: string,
@@ -10,9 +10,9 @@ export type SensorRecord = {
 }
 
 export async function getLatestRecords(): Promise<AxiosResponse<SensorRecord[]>> {
-    return await axios.get(HOST + '/record?last=true');
+    return await axios.get(SERVER_URL + "/record?last=true");
 }
 
 export async function getSensorRecords(sensorId: string): Promise<AxiosResponse<SensorRecord[]>> {
-    return await axios.get(HOST + '/record?id=' + sensorId);
+    return await axios.get(SERVER_URL + "/record?id=" + sensorId);
 }
