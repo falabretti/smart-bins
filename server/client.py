@@ -26,18 +26,18 @@ def write_record(record):
                     org=environment.ORG, record=point)
 
 
-def query_records(location=None, sensor_id=None, last_only=False):
+def query_records(location=None, sensor_id=None, last_only=False, limit=None):
     query_api = client.query_api()
-    query = build_query(location, sensor_id, last_only)
+    query = build_query(location, sensor_id, last_only, limit)
 
     result = query_api.query(org=environment.ORG, query=query)
     return build_results(result)
 
 
-def build_query(location=None, sensor_id=None, last_only=None):
+def build_query(location=None, sensor_id=None, last_only=None, limit=None):
 
     query = f'from(bucket:"{environment.BUCKET}")\
-    |> range(start: -60m)\
+    |> range(start: -1d)\
     |> filter(fn:(r) => r._measurement == "{MEASUREMENT}")'
 
     if location is not None:
@@ -47,6 +47,9 @@ def build_query(location=None, sensor_id=None, last_only=None):
         query += f'|> filter(fn:(r) => r.{SENSOR_ID_TAG} == "{sensor_id}")'
 
     query += f'|> filter(fn:(r) => r._field == "{FIELD}")'
+
+    if limit is not None:
+        query += f'|> limit(n: {limit}, offset: 0)'
 
     if last_only:
         query += '|> last()'

@@ -5,6 +5,7 @@ from flask_socketio import SocketIO, emit
 
 SENSOR_ID_PARAM = 'id'
 LAST_PARAM = 'last'
+LIMIT_PARAM = 'limit'
 
 app = Flask(__name__)
 CORS(app)
@@ -23,7 +24,9 @@ def create_record():
 def retrieve_records():
     sensor_id = request.args.get(SENSOR_ID_PARAM)
     last_only = request.args.get(LAST_PARAM)
-    return jsonify(client.query_records(sensor_id=sensor_id, last_only=last_only))
+    limit = request.args.get(LIMIT_PARAM)
+    records = client.query_records(sensor_id=sensor_id, last_only=last_only, limit=limit)
+    return jsonify(records)
 
 
 socketio.run(app, debug=True, host='0.0.0.0', allow_unsafe_werkzeug=True)
