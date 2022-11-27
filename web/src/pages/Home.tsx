@@ -34,7 +34,7 @@ function Home() {
       entry.sensor_id === record.sensor_id);
       
     if (!currentRecord) {
-      updateRecords([...records, record]);
+      updateRecords([...recordsRef.current, record]);
       return;
     }
 
