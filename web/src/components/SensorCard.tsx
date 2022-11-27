@@ -43,7 +43,7 @@ function SensorCard(props: SensorCardProps) {
             </Box>
           </Grid>
           <Grid item xs={8}>
-            <Box sx={{ marginLeft: 2, textAlign: "right" }}>
+            <Box sx={{ marginLeft: 2, textAlign: "right", overflow: "hidden", whiteSpace: "nowrap" }}>
               <Typography variant="subtitle1">
                 Sensor {sensor_id}, {location}
               </Typography>
