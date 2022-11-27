@@ -14,5 +14,5 @@ export async function getLatestRecords(): Promise<AxiosResponse<SensorRecord[]>>
 }
 
 export async function getSensorRecords(sensorId: string): Promise<AxiosResponse<SensorRecord[]>> {
-    return await axios.get(SERVER_URL + "/record?id=" + sensorId);
+    return await axios.get(SERVER_URL + "/record?id=" + sensorId + "&limit=100");
 }

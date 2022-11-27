@@ -1,4 +1,4 @@
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Toolbar, Typography, useTheme } from "@mui/material";
+import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Toolbar, Typography, useTheme } from "@mui/material";
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import { getSensorRecords, SensorRecord } from "../services/client";
@@ -34,7 +34,10 @@ function SensorDetails(props: any) {
       <Button variant="contained" sx={{ mb: 2 }} onClick={returnHome}>Back</Button>
       <TableContainer component={Paper}>
         <Toolbar sx={{ [theme.breakpoints.up('xs')]: { pl: 2 } }}>
-          <Typography variant="h5" sx={{ fontWeight: 700 }}>Sensor {sensorId} History</Typography>
+          <Box>
+            <Typography variant="h5" sx={{ fontWeight: 700 }}>Sensor {sensorId} History</Typography>
+            <Typography variant="subtitle2">Last 100 events</Typography>
+          </Box>
         </Toolbar>
         <Table size="small">
           <TableHead>
